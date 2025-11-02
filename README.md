@@ -1,8 +1,7 @@
 # ESAP Smartwatch Website
 
 Official website for the ESAP Smartwatch project - an open-source health tracking smartwatch developed by Embedded Systems @ Purdue.
-
-🌐 **Live Site**: [https://esap-smartwatch.github.io](https://esap-smartwatch.github.io)
+**Live Site**: [https://esap-smartwatch.github.io](https://esap-smartwatch.github.io)
 
 ## About
 
