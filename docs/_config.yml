@@ -1,41 +1,48 @@
 # Set this website's info
-# Change "coffeebank" to your GitHub username
-# Change "moonrise" to your repository name
-url: "https://coffeebank.github.io"
-baseurl: "/moonrise"
+url: "https://esap-smartwatch.github.io"
+baseurl: ""
 siteIcon: /media/android-chrome-192x192.png
-siteYear: 2020
+siteYear: 2025
 siteFooterlink: /about
 showinSearchEngines: true
 # googleAnalyticsID: (uncomment to use)
 
 
-# Set basic server info
-serverName: Moonrise MC
-serverDescription: A Minecraft server where we have lots of fun!
-serverIP: 31.41.59.26:5358
+# Set basic project info
+serverName: ESAP Smartwatch
+serverDescription: Open-source smartwatch project with health tracking capabilities
+serverIP: github.com/ESAP-Smartwatch/app
 useBedrockForOnlineStatus: false
 
 
-# Discord information
-discordInvite: https://discord.gg/minecraft
+# GitHub and social information
+githubRepo: https://github.com/ESAP-Smartwatch/app
+discordInvite: https://github.com/ESAP-Smartwatch/app/discussions
 discordServerID: 299881420891881473
 discordChannelID: 450428756855750666
 
 
-# # Navbar Links at the top of the page (uncomment "siteNav" to use)
-# #   name - The title on the navbar
-# #   url - The link it should go to (for example, if you have "maps.md" file, put "maps")
-# #   newtab - Whether link should open in new tab
-# 
-# siteNav:
-#   - name: Server Map
-#     url: map
-#     newtab: true
-#   - name: Screenshots
-#     url: screenshots
-#   - name: About
-#     url: about
+# Navbar Links at the top of the page
+#   name - The title on the navbar
+#   url - The link it should go to (for example, if you have "maps.md" file, put "maps")
+#   newtab - Whether link should open in new tab
+
+siteNav:
+  - name: Documentation
+    url: map
+    newtab: false
+  - name: Screenshots
+    url: screenshots
+    newtab: false
+  - name: About
+    url: about
+    newtab: false
+  - name: Support
+    url: donate
+    newtab: false
+  - name: GitHub
+    url: https://github.com/ESAP-Smartwatch/app
+    newtab: true
 
 
 # Don't change anything below here, these are defaults set by GitHub Pages:

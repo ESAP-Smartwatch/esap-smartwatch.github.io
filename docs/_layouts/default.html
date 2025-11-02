@@ -28,10 +28,14 @@ layout: compress
     <meta name="theme-color" content="#272727">
 
     <!-- social media -->
-    <meta property="og:title" content="{{ site.serverName }} - Minecraft Server">
+    <meta property="og:title" content="{{ site.serverName }} - Open-Source Health Tracking Smartwatch">
     <meta property="og:description" content="{{ site.serverDescription }}">
     <meta property="og:image" content="{{ site.baseurl }}{{ site.siteIcon }}">
     <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ site.serverName }}">
+    <meta name="twitter:description" content="{{ site.serverDescription }}">
 
 </head>
 <body style="min-height:100vh;">
@@ -57,9 +61,15 @@ layout: compress
                         Home
                     </a>
                     {% for nlink in site.siteNav %}
-                        <a href="{{ site.baseurl }}/{{ nlink.url }}" rel="noopener" {% if nlink.newtab == true %}target="_blank" {% endif %}class="block inline-block {% if page.navname == nlink.name %}text-white{% else %}text-teal-200 hover:text-white{% endif %} mr-4">
-                            {{ nlink.name }}
-                        </a>
+                        {% if nlink.url contains "http" %}
+                            <a href="{{ nlink.url }}" rel="noopener" {% if nlink.newtab == true %}target="_blank" {% endif %}class="block inline-block {% if page.navname == nlink.name %}text-white{% else %}text-teal-200 hover:text-white{% endif %} mr-4">
+                                {{ nlink.name }}
+                            </a>
+                        {% else %}
+                            <a href="{{ site.baseurl }}/{{ nlink.url }}" rel="noopener" {% if nlink.newtab == true %}target="_blank" {% endif %}class="block inline-block {% if page.navname == nlink.name %}text-white{% else %}text-teal-200 hover:text-white{% endif %} mr-4">
+                                {{ nlink.name }}
+                            </a>
+                        {% endif %}
                     {% endfor %}
                 </div>
             {% endif %}
