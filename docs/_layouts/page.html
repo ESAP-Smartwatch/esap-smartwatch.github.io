@@ -3,6 +3,24 @@ layout: default
 ---
 
 <link href="{{ site.baseurl }}/assets/styles-page.css" rel="stylesheet">
-<div class="layoutpage mx-auto pt-2 pb-8 px-2">
-    {{ content }}
+
+<!-- Page Header -->
+<div class="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 border-b border-gray-200 dark:border-gray-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            {{ page.title | default: page.navname }}
+        </h1>
+        {% if page.description %}
+        <p class="text-xl text-gray-600 dark:text-gray-400">
+            {{ page.description }}
+        </p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Page Content -->
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="prose prose-lg dark:prose-invert max-w-none">
+        {{ content }}
+    </div>
 </div>

@@ -1,13 +1,13 @@
 ---
 layout: page
 navname: About
+title: About ESAP Smartwatch
+description: Learn about our mission to create an accessible, educational platform for embedded systems and wearable technology.
 ---
 
-# About {{ site.serverName }}
+The ESAP Smartwatch project is an **open-source initiative** by the Embedded Systems @ Purdue team to create a fully functional, customizable smartwatch with health tracking capabilities.
 
-The ESAP Smartwatch project is an open-source initiative by the Embedded Systems @ Purdue team to create a fully functional, customizable smartwatch with health tracking capabilities.
-
-## Project Goals
+## 🎯 Project Goals
 
 Our mission is to provide an accessible, educational platform for learning about:
 - Embedded systems design and development

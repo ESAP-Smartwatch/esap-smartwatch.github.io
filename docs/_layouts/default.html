@@ -22,7 +22,7 @@ layout: compress
     <!-- css and fonts -->
     <link href="{{ site.baseurl }}/assets/styles.css" rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- set chrome and embed site color -->
     <meta name="theme-color" content="#272727">
@@ -39,69 +39,133 @@ layout: compress
 
 </head>
 <body style="min-height:100vh;">
-    <!-- navbar -->
-    <nav class="flex items-center justify-between flex-wrap bg-transparent p-6">
-        <a href="{{ site.baseurl }}/">
-            <div class="flex items-center flex-shrink-0 text-white mr-6 select-none">
-                <img src="{{ site.baseurl }}{{ site.siteIcon }}" class="mr-4 rounded shadow" width="30px" alt="{{ site.serverName }}">
-                <span class="font-semibold text-xl tracking-tight hidden md:block" id="serverLogoName">{{ site.serverName }}</span>
+    <!-- Modern Navbar -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 backdrop-blur-sm bg-opacity-90">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="{{ site.baseurl }}/" class="flex items-center space-x-3 group">
+                    <img src="{{ site.baseurl }}{{ site.siteIcon }}" class="h-8 w-8 rounded-lg shadow-sm group-hover:shadow-md transition-shadow" alt="{{ site.serverName }}">
+                    <span class="font-bold text-xl text-gray-900 dark:text-white hidden sm:block">{{ site.serverName }}</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
                 {% if site.siteNav %}
-                    <div class="text-transparent select-none px-0 md:px-4 pb-1">
-                        <div id="serverInd">&#11044;</div>
-                    </div>
-                {% endif %}
-            </div>
-        </a>
-        <div class="block flex-grow flex items-center w-auto">
-            
-            {% if site.siteNav %}
-                <div class="text-base flex-grow text-right pb-1 lg:pb-0">
-                    <!-- Home link only on lg -->
-                    <a href="{{ site.baseurl }}/" rel="noopener" class="hidden lg:block lg:inline-block {% if page.navname == "Home" %}text-white{% else %}text-teal-200 hover:text-white{% endif %} mr-4">
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="{{ site.baseurl }}/" class="px-3 py-2 rounded-lg text-sm font-medium {% if page.navname == 'Home' %}text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30{% else %}text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800{% endif %} transition-colors">
                         Home
                     </a>
                     {% for nlink in site.siteNav %}
                         {% if nlink.url contains "http" %}
-                            <a href="{{ nlink.url }}" rel="noopener" {% if nlink.newtab == true %}target="_blank" {% endif %}class="block inline-block {% if page.navname == nlink.name %}text-white{% else %}text-teal-200 hover:text-white{% endif %} mr-4">
+                            <a href="{{ nlink.url }}" {% if nlink.newtab == true %}target="_blank" rel="noopener"{% endif %} class="px-3 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center">
                                 {{ nlink.name }}
+                                {% if nlink.newtab == true %}
+                                <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                {% endif %}
                             </a>
                         {% else %}
-                            <a href="{{ site.baseurl }}/{{ nlink.url }}" rel="noopener" {% if nlink.newtab == true %}target="_blank" {% endif %}class="block inline-block {% if page.navname == nlink.name %}text-white{% else %}text-teal-200 hover:text-white{% endif %} mr-4">
+                            <a href="{{ site.baseurl }}/{{ nlink.url }}" class="px-3 py-2 rounded-lg text-sm font-medium {% if page.navname == nlink.name %}text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30{% else %}text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800{% endif %} transition-colors">
                                 {{ nlink.name }}
                             </a>
                         {% endif %}
                     {% endfor %}
                 </div>
-            {% endif %}
-
+                {% endif %}
+                
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
         
-        <!-- show status if no siteNav -->
-        {% if site.siteNav %}{% else %}
-        <div id="serverStatus" class="text-gray-200 hidden md:block cursor-pointer"></div>
-        {% endif %}
-
-        {% if site.siteNav %}{% else %}
-        <!-- only show mobile status if no siteNav -->
-        <div class="block md:hidden">
-            <div id="serverStatusM" class="text-gray-200 py-2 md:py-4"></div>
+        <!-- Mobile Navigation -->
+        {% if site.siteNav %}
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 dark:border-gray-800">
+            <div class="px-4 py-3 space-y-1">
+                <a href="{{ site.baseurl }}/" class="block px-3 py-2 rounded-lg text-sm font-medium {% if page.navname == 'Home' %}text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                    Home
+                </a>
+                {% for nlink in site.siteNav %}
+                    {% if nlink.url contains "http" %}
+                        <a href="{{ nlink.url }}" {% if nlink.newtab == true %}target="_blank" rel="noopener"{% endif %} class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300">
+                            {{ nlink.name }} {% if nlink.newtab == true %}↗{% endif %}
+                        </a>
+                    {% else %}
+                        <a href="{{ site.baseurl }}/{{ nlink.url }}" class="block px-3 py-2 rounded-lg text-sm font-medium {% if page.navname == nlink.name %}text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30{% else %}text-gray-700 dark:text-gray-300{% endif %}">
+                            {{ nlink.name }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
-
-        <!-- show loading for status API only if javascript is enabled -->
-        <script>
-            document.getElementById("serverStatus").innerHTML = "Loading...";
-            document.getElementById("serverStatusM").innerHTML = "Loading...";
-        </script>
         {% endif %}
-
     </nav>
+    
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button')?.addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
 
     {{ content }}
 
-    <div class="layoutfooter w-full pb-8 text-center transition duration-200">
-        <a href="https://github.com/coffeebank/moonrise" rel="noopener" title="Moonrise by coffeebank" class="hover:text-gray-400">Powered by Moonrise</a> &middot; 
-        <a href="{% if site.siteFooterlink %}{{ site.baseurl }}{{ site.siteFooterlink }}{% else %}{{ site.baseurl }}/about{% endif %}" rel="noopener" title="Legal" class="hover:text-gray-400">&copy; {{ site.siteYear }}<script>new Date().getFullYear()>{{ site.siteYear }}&&document.write("&#8208;"+new Date().getFullYear());</script> {{ site.serverName }} &middot; About/Contact</a>
-    </div>
+    <!-- Modern Footer -->
+    <footer class="bg-gray-900 text-gray-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- About -->
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="{{ site.baseurl }}{{ site.siteIcon }}" class="h-8 w-8 rounded-lg" alt="{{ site.serverName }}">
+                        <span class="font-bold text-xl text-white">{{ site.serverName }}</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">{{ site.serverDescription }}</p>
+                    <div class="flex space-x-4">
+                        <a href="{{ site.githubRepo }}" target="_blank" rel="noopener" class="text-gray-400 hover:text-white transition-colors" aria-label="GitHub">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="{{ site.baseurl }}/map" class="text-gray-400 hover:text-white transition-colors">Documentation</a></li>
+                        <li><a href="{{ site.baseurl }}/screenshots" class="text-gray-400 hover:text-white transition-colors">Screenshots</a></li>
+                        <li><a href="{{ site.githubRepo }}/releases" target="_blank" rel="noopener" class="text-gray-400 hover:text-white transition-colors">Releases</a></li>
+                        <li><a href="{{ site.githubRepo }}/discussions" target="_blank" rel="noopener" class="text-gray-400 hover:text-white transition-colors">Discussions</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Project -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Project</h3>
+                    <ul class="space-y-2">
+                        <li><a href="{{ site.baseurl }}/about" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+                        <li><a href="{{ site.baseurl }}/donate" class="text-gray-400 hover:text-white transition-colors">Support</a></li>
+                        <li><a href="{{ site.githubRepo }}" target="_blank" rel="noopener" class="text-gray-400 hover:text-white transition-colors">GitHub</a></li>
+                        <li><a href="{{ site.githubRepo }}/blob/main/LICENSE" target="_blank" rel="noopener" class="text-gray-400 hover:text-white transition-colors">License</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <p class="text-gray-400 text-sm">
+                    &copy; {{ site.siteYear }}<script>new Date().getFullYear()>{{ site.siteYear }}&&document.write("-"+new Date().getFullYear());</script> {{ site.serverName }}. All rights reserved.
+                </p>
+                <p class="text-gray-400 text-sm">
+                    Built by <a href="https://github.com/ESAP-Smartwatch" target="_blank" rel="noopener" class="text-blue-400 hover:text-blue-300">Embedded Systems @ Purdue</a>
+                </p>
+            </div>
+        </div>
+    </footer>
 
     {% if page.navname == "Home" %}
     <script type="text/javascript" src="{{ site.baseurl }}/assets/serverstatus-home.js"></script>

@@ -1,9 +1,9 @@
 ---
 layout: page
 navname: Documentation
+title: Documentation
+description: Comprehensive guides and documentation for getting started with the ESAP Smartwatch project.
 ---
-
-# Documentation
 
 Comprehensive guides and documentation for the ESAP Smartwatch project.
 

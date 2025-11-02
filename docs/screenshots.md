@@ -1,19 +1,31 @@
 ---
 layout: page
 navname: Screenshots
+title: Screenshots
+description: Explore screenshots of the ESAP Smartwatch mobile app and hardware designs.
 ---
 
 <link href="{{ site.baseurl }}/assets/micromodal.custom.css" rel="stylesheet">
 
-# Screenshots
-
 {% assign imagenum = 0 %}
 
-<div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+{% if imagenum == 0 %}
+<div class="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-12 text-center mb-8">
+    <div class="text-6xl mb-4">📸</div>
+    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">Screenshots Coming Soon</h3>
+    <p class="text-gray-600 dark:text-gray-400 mb-6">We're working on capturing beautiful screenshots of the ESAP Smartwatch app and hardware.</p>
+    <p class="text-gray-500 dark:text-gray-500 text-sm">Add images to the <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">docs/screenshots/</code> folder to display them here.</p>
+</div>
+{% endif %}
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 {% for image in site.static_files %}
 {% if image.path contains 'screenshots/' %}
-<div data-micromodal-trigger="{{ image.name }}" class="cursor-pointer transition-shadow duration-200 hover:shadow-lg">
-<img class="object-cover w-full h-32 md:h-48 rounded-lg" src="{{ site.baseurl }}{{ image.path }}" alt="image" />
+<div data-micromodal-trigger="{{ image.name }}" class="group cursor-pointer">
+    <div class="relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+        <img class="object-cover w-full h-64 group-hover:scale-110 transition-transform duration-300" src="{{ site.baseurl }}{{ image.path }}" alt="Screenshot" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    </div>
 </div>
 {% assign imagenum = imagenum | plus: 1 %}
 {% endif %}

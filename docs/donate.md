@@ -1,9 +1,9 @@
 ---
 layout: page
 navname: Support
+title: Support the Project
+description: Help us grow the ESAP Smartwatch community and contribute to open-source wearable technology.
 ---
-
-# Support the Project
 
 The ESAP Smartwatch is an open-source project developed by students at Purdue University. We're committed to keeping all our hardware designs, firmware, and software freely available to the community.
 
